@@ -22,29 +22,29 @@ const characters = [
 ];
 
 const tomes = [
-  "images/tomes/ArmorTome.png",
-  "images/tomes/AttractionTome.png",
-  "images/tomes/BloodTome.png",
-  "images/tomes/ChaosTome.png",
-  "images/tomes/CooldownTome.png",
-  "images/tomes/CursedTome.png",
-  "images/tomes/DamageTome.png",
-  "images/tomes/DurationTome.png",
-  "images/tomes/EvasionTome.png",
-  "images/tomes/GoldenTome.png",
-  "images/tomes/HealthTome.png",
-  "images/tomes/KnockbackTome.png",
-  "images/tomes/LuckTome.png",
-  "images/tomes/PrecisionTome.png",
-  "images/tomes/ProjectileSpeedTome.png",
-  "images/tomes/QuantityTome.png",
-  "images/tomes/RegenerationTome.png",
-  "images/tomes/Retaliation.png",
-  "images/tomes/ShieldTome.png",
-  "images/tomes/SilverTome.png",
-  "images/tomes/SizeTome.png",
-  "images/tomes/SpeedTome.png",
-  "images/tomes/XpTome.png",
+  "images/tomes/Armor.png",
+  "images/tomes/Attraction.png",
+  "images/tomes/Blood.png",
+  "images/tomes/Chaos.png",
+  "images/tomes/Cooldown.png",
+  "images/tomes/Cursed.png",
+  "images/tomes/Damage.png",
+  "images/tomes/Duration.png",
+  "images/tomes/Evasion.png",
+  "images/tomes/Golden.png",
+  "images/tomes/Health.png",
+  "images/tomes/Knockback.png",
+  "images/tomes/Luck.png",
+  "images/tomes/Precision.png",
+  "images/tomes/ProjectileSpeed.png",
+  "images/tomes/Quantity.png",
+  "images/tomes/Regeneration.png",
+  "images/tomes/Thorns.png",
+  "images/tomes/Shield.png",
+  "images/tomes/Silver.png",
+  "images/tomes/Size.png",
+  "images/tomes/Agility.png",
+  "images/tomes/Xp.png",
 ];
 
 const weapons = [
@@ -61,18 +61,17 @@ const weapons = [
   "images/weapons/Dexecutioner.png",
   "images/weapons/Dice.png",
   "images/weapons/DragonsBreath.png",
-  "images/weapons/Firestaff.png",
-  "images/weapons/Firewalker.png",
+  "images/weapons/FireStaff.png",
+  "images/weapons/Flamewalker.png",
   "images/weapons/Frostwalker.png",
   "images/weapons/HeroSword.png",
   "images/weapons/Katana.png",
-  "images/weapons/LightningBolt.png",
   "images/weapons/LightningStaff.png",
   "images/weapons/Mine.png",
   "images/weapons/PoisonFlask.png",
   "images/weapons/Revolver.png",
   "images/weapons/Shotgun.png",
-  "images/weapons/SluttyRocket.png",
+  "images/weapons/Rocket.png",
   "images/weapons/Sniper.png",
   "images/weapons/SpaceNoodle.png",
   "images/weapons/Sword.png",
@@ -140,23 +139,22 @@ window.onload = () => {
 };
 
 function exportBuild() {
+  const characterEl = document.getElementById("characterImg");
   const data = {
-    character: {
-      src: document
-        .getElementById("characterImg")
-        .src.split("/")
-        [
-          document.getElementById("characterImg").src.split("/").length - 1
-        ].slice(0, -4),
-    },
-    items: [],
+    character: characterEl.src.split("/").pop().slice(0, -4),
+    weapons: [],
+    tomes: [],
   };
 
   for (let i = 1; i <= 8; i++) {
     const el = document.getElementById("item" + i);
-    data.items.push({
-      src: el.src.split("/")[el.src.split("/").length - 1].slice(0, -4),
-    });
+    const name = el.src.split("/").pop().slice(0, -4);
+
+    if (weapons.some((w) => w.includes(name))) {
+      data.weapons.push(name);
+    } else if (tomes.some((t) => t.includes(name))) {
+      data.tomes.push(name);
+    }
   }
 
   const jsonStr = JSON.stringify(data, null, 2);
