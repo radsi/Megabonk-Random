@@ -53,7 +53,7 @@ const weapons = [
   "images/weapons/Bananarang.png",
   "images/weapons/BlackHole.png",
   "images/weapons/BloodMagic.png",
-  "images/weapons/BluetoothKnife.png",
+  "images/weapons/BluetoothDagger.png",
   "images/weapons/Bone.png",
   "images/weapons/Bow.png",
   "images/weapons/Chunkers.png",
@@ -170,3 +170,4 @@ function exportBuild() {
 }
 
 document.getElementById("export").onclick = exportBuild;
+
